@@ -12,6 +12,8 @@ typedef struct Consultas{
     int horario;
     bool agendadaFlag;
     char descricao[MAX_STRING_SIZE];
+    struct Consultas *prox;
+    struct Consultas *ante;
 }Consultas;
 
 #endif

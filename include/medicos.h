@@ -12,4 +12,6 @@ typedef struct Medico{
     struct Medico *ante;
 }Medico;
 
+Medico* insere_medico(Medico* lista);
+
 #endif
