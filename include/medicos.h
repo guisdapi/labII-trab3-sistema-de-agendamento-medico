@@ -10,8 +10,9 @@ typedef struct Medico{
     char especialidade[MAX_STRING_SIZE];
     struct Medico *prox;
     struct Medico *ante;
-}Medico;
+} Medico;
 
+Medico* cria_medico();
 Medico* insere_medico(Medico* lista);
 
 #endif

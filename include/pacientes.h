@@ -9,6 +9,6 @@ typedef struct Paciente{
     int telefone;
     struct Paciente *prox;
     struct Paciente *ante;
-}Paciente;
+} Paciente;
 
 #endif
