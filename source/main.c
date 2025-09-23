@@ -10,5 +10,7 @@ int main() {
     
     Medico* lista = cria_medico();
 
+    printf("Teste");
+
     return 0;
 }
