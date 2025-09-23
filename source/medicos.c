@@ -48,7 +48,8 @@ void imprime_medicos(Medico* lista) {
             printf("CRM: %d.\n", lista->crm);
             printf("Nome: %s.\n", lista->nome);
             printf("Telefone: %d.\n", lista->telefone);
-            printf("Especialidade: %s.\n\n", lista->especialidade);
+            printf("Especialidade: %s.\n", lista->especialidade);
+            printf("Medico adicionado!\n\n");
             lista = lista->prox;
         }
     } else

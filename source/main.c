@@ -6,9 +6,6 @@ int main() {
     
     Medico* lista = cria_medico();
     
-    
-    lista = insere_medico(lista);
-    imprime_medicos(lista);
-
+    menu(lista);
     return 0;
 }
