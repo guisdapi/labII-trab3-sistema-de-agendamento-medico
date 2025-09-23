@@ -1,8 +1,6 @@
 #ifndef PACIENTES_H
 #define PACIENTES_H
 
-#define MAX_STRING_SIZE 512
-
 typedef struct Paciente{
     int cpf;
     char nome[MAX_STRING_SIZE];

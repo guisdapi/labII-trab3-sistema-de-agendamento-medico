@@ -1,10 +1,6 @@
 #ifndef CONSULTAS_H
 #define CONSULTAS_H
 
-#include <stdbool.h>
-#include "pacientes.h"
-#include "medicos.h"
-
 typedef struct Consultas{
     Paciente *paciente;
     Medico *medico;

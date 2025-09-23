@@ -1,8 +1,6 @@
 #ifndef MEDICOS_H
 #define MEDICOS_H
 
-#define MAX_STRING_SIZE 512
-
 typedef struct Medico{
     int crm;
     char nome[MAX_STRING_SIZE];
