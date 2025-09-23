@@ -5,8 +5,10 @@
 int main() {
     
     Medico* lista = cria_medico();
-
-    printf("Teste");
+    
+    
+    lista = insere_medico(lista);
+    imprime_medicos(lista);
 
     return 0;
 }

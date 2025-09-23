@@ -12,5 +12,6 @@ typedef struct Medico{
 
 Medico* cria_medico();
 Medico* insere_medico(Medico* lista);
+void imprime_medicos(Medico* lista);
 
 #endif
