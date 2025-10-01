@@ -8,5 +8,6 @@
 #include "consultas.h"
 #include "lista.h"
 #include "menu.h"
+#include "helpers.h"
 
 #endif

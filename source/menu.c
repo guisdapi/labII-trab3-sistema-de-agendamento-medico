@@ -11,8 +11,7 @@ void menu(Medico* lista) {
         printf("1. Inserir medico\n");
         printf("2. Listar medicos\n");
         printf("0. Sair\n");
-        printf("\nDigite o numero correspondente: ");
-        scanf("%d", &aux);
+        aux = get_int("Escolha uma opção: ");
 
         switch (aux)
         {
