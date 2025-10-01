@@ -12,6 +12,7 @@ void get_string(const char *pergunta, char *destino, int tam){
     }
 }
 
+//Pede por uma string e depois transforma pra int, não aceita entrada inválida
 int get_int(const char *pergunta){
     char buffer[100];
     int numero;

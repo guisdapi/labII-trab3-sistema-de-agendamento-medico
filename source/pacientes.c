@@ -30,7 +30,7 @@ void imprime_pacientes(Paciente* lista){
         while(lista != NULL){
             printf("Paciente %d.\n", cont);
             printf("CPF: %s.\n", lista->cpf);
-            pritnf("Nome: %s.\n", lista->nome);
+            printf("Nome: %s.\n", lista->nome);
             printf("Telefone: %s.\n", lista->telefone);
             lista = lista->prox;
             cont++;

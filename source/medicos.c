@@ -40,4 +40,5 @@ void imprime_medicos(Medico* lista) {
         }
     } else
         printf("Lista de médicos vazia.\n");
+    printf("\n");
 }

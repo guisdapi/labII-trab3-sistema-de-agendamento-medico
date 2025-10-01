@@ -4,8 +4,9 @@
 
 int main() {
     
-    Medico* lista = cria_medico();
+    Medico* listaMedicos = cria_medico();
+    Paciente* listaPaciente = cria_paciente();
     
-    menu(lista);
+    menu(listaMedicos, listaPaciente);
     return 0;
 }
