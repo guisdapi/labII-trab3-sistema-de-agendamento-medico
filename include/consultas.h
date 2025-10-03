@@ -1,6 +1,12 @@
 #ifndef CONSULTAS_H
 #define CONSULTAS_H
 
+enum AgendadaFlag{
+    LIVRE = 0,
+    MARCADA,
+    REALIZADA,
+};
+
 typedef struct Consultas{
     Paciente *paciente;
     Medico *medico;
@@ -11,5 +17,9 @@ typedef struct Consultas{
     struct Consultas *prox;
     struct Consultas *ante;
 }Consultas;
+
+Consultas* cria_consulta();
+void input_consulta(Consultas* novo_node, Medico* lista);
+Consultas* insere_consulta(Consultas* l, Medico* lista);
 
 #endif

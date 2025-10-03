@@ -42,3 +42,17 @@ void imprime_medicos(Medico* lista) {
         printf("Lista de médicos vazia.\n");
     printf("\n");
 }
+
+Medico* procura_medico(Medico* lista, char *nome){
+    char buffer[MAX_STRING_SIZE];
+    Medico* p = lista;
+    while(p != NULL){
+        strcpy(buffer, p->nome);
+        string_to_upper(buffer);
+        if(strcmp(buffer, nome) == 0){
+            return p;
+        }
+        p = p->prox;
+    }
+    printf("Médico não encontrado\n");
+}

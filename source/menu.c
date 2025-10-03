@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "projects.h"
 
-void menu(Medico* medicos, Paciente* pacientes) {
+void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
     int aux=1;
 
     while (aux!=0) {
@@ -12,6 +12,7 @@ void menu(Medico* medicos, Paciente* pacientes) {
         printf("2. Listar medicos\n");
         printf("3. Inserir paciente\n");
         printf("4. Listar pacientes\n");
+        printf("5. Inserir consulta\n");
         printf("0. Sair\n");
         aux = get_int("Escolha uma opção: ");
 
@@ -29,6 +30,8 @@ void menu(Medico* medicos, Paciente* pacientes) {
         case LISTAR_PACIENTES:
             imprime_pacientes(pacientes);
             break;
+        case INSERIR_CONSULTA:
+            insere_consulta(consultas, medicos);
         default:
             printf("Opção inválida.");
             break;

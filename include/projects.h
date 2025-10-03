@@ -7,7 +7,8 @@ enum Status{
     INSERIR_MEDICO = 1,
     LISTAR_MEDICOS,
     INSERIR_PACIENTE,
-    LISTAR_PACIENTES
+    LISTAR_PACIENTES,
+    INSERIR_CONSULTA
 };
 
 #include "pacientes.h"

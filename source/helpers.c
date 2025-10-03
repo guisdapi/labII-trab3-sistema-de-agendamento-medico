@@ -2,7 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include "projects.h"
+
+//Deixa uma string em caixa alta
+void string_to_upper(char *str){
+    int i = 0;
+    while(str[i] != '\0'){
+        str[i] = toupper(str[i]);
+        i++;
+    }
+}
 
 //Pede por uma string e padroniza, podemos usar pra sanitizar melhor dps
 void get_string(const char *pergunta, char *destino, int tam){
