@@ -12,5 +12,6 @@ typedef struct Paciente{
 Paciente* cria_paciente();
 Paciente* insere_paciente(Paciente *lista);
 void imprime_pacientes(Paciente *lista);
+Paciente* procura_paciente(Paciente* lista, char *cpf);
 
 #endif

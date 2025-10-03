@@ -19,7 +19,7 @@ typedef struct Consultas{
 }Consultas;
 
 Consultas* cria_consulta();
-void input_consulta(Consultas* novo_node, Medico* lista);
-Consultas* insere_consulta(Consultas* l, Medico* lista);
+void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente);
+Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente);
 
 #endif

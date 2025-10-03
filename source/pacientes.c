@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "projects.h"
 
@@ -38,4 +39,15 @@ void imprime_pacientes(Paciente* lista){
     }
     else
         printf("Lista de pacientes vazia.\n");
+}
+
+Paciente* procura_paciente(Paciente* lista, char *cpf){
+    Paciente* p = lista;
+    while(p != NULL){
+        if(strcmp(p->cpf, cpf) == 0){
+            return p;
+        }
+        p = p->prox;
+    }
+    return NULL;
 }

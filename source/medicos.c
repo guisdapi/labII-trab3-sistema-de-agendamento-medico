@@ -54,5 +54,5 @@ Medico* procura_medico(Medico* lista, char *nome){
         }
         p = p->prox;
     }
-    printf("Médico não encontrado\n");
+    return NULL;
 }

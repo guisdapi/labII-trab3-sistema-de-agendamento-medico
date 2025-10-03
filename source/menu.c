@@ -31,7 +31,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             imprime_pacientes(pacientes);
             break;
         case INSERIR_CONSULTA:
-            insere_consulta(consultas, medicos);
+            insere_consulta(consultas, medicos, pacientes);
         default:
             printf("Opção inválida.");
             break;
