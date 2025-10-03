@@ -17,15 +17,20 @@ void menu(Medico* medicos, Paciente* pacientes) {
 
         switch (aux)
         {
-        case 1:
+        case INSERIR_MEDICO:
             medicos = insere_medico(medicos);
             break;
-
-        case 2:
+        case LISTAR_MEDICOS:
             imprime_medicos(medicos);
             break;
-        
+        case INSERIR_PACIENTE:
+            pacientes = insere_paciente(pacientes);
+            break;
+        case LISTAR_PACIENTES:
+            imprime_pacientes(pacientes);
+            break;
         default:
+            printf("Opção inválida.");
             break;
         }
     }
