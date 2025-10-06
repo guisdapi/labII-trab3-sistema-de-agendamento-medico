@@ -323,7 +323,23 @@ void relatorio_consulta_descricao(Consultas *l){
 }
 
 void relatorio_pacientes_especialidade(Consultas *l){
-    
+    char especialidade_busca[MAX_STRING_SIZE];
+    printf("-- Pacientes que consultaram em uma determinada especialidade em determinado mês --\n");
+    get_string("Digite a especialidade: \n", especialidade_busca, MAX_STRING_SIZE);
+    int mes_busca = get_int("Digite o mês: ");
+    bool paciente_encontrado = false;
+    Consultas* p = l;
+    while(p != NULL){
+        if(strcmp(especialidade_busca, p->medico->especialidade) == 0 && 
+        p->data[1] == mes_busca && 
+        p->agendadaFlag == REALIZADA){
+            paciente_encontrado = true;
+            printf("Paciente: %s\n", p->paciente->nome);
+        }
+        p = p->prox;
+    }
+    if(!paciente_encontrado)
+        printf("Nenhum paciente encontrado, ou então a consulta ainda não foi realizada.\n");
 }
 
 void relatorio_pacientes_medicos(Consultas *l){
