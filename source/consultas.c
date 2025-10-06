@@ -4,12 +4,6 @@
 #include <stdbool.h>
 #include "projects.h"
 
-static const char *LISTA_HORARIOS[HORARIOS] = {
-    "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
-    "11:00", "11:30", "12:00", "14:00", "14:30", "15:00", 
-    "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"
-};
-
 Consultas* cria_consulta(){
     return NULL;
 }
@@ -225,5 +219,34 @@ void realizar_consulta(Consultas* l) {
 }
 
 void relatorio_consultas_dia(Consultas* l) {
-    
+printf("\nR1: Consultas Agendadas por Dia\n");
+
+    int dia_busca = get_int("Digite o dia que deseja consultar: ");
+    int mes_busca = get_int("Digite o mes: ");
+
+    Consultas* p = l;
+    int consultas_encontradas = 0;
+
+    printf("\n-- Consultas agendadas para %02d/%02d --\n", dia_busca, mes_busca);
+
+    while (p != NULL) {
+
+        if (p->data[0] == dia_busca && p->data[1] == mes_busca && p->agendadaFlag == MARCADA) {
+
+            printf("----------------------------------\n");
+            printf("Horario: %02d:%02d\n", p->horario[0], p->horario[1]);
+            printf("Paciente: %s\n", p->paciente->nome);
+            printf("Medico: %s - Especialidade: %s\n", p->medico->nome, p->medico->especialidade);
+            consultas_encontradas++;
+        }
+        p = p->prox;
+    }
+
+    if (consultas_encontradas == 0) {
+        printf("\nNenhuma consulta AGENDADA foi encontrada para esta data.\n");
+    } else {
+        printf("----------------------------------\n");
+        printf("Total: %d consulta(s) agendada(s).\n", consultas_encontradas);
+    }
+
 }
