@@ -128,7 +128,7 @@ void listar_consulta(Consultas* consulta){
     printf("---------------------------\n");
 }
 
-void listar_consultas (Consultas* l) {
+void listar_todas_consultas (Consultas* l) {
     if (l == NULL) {
         printf("\nNao ha consultas agendadas.\n");
         return;
