@@ -48,6 +48,9 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         case RELATORIO_CONSULTAS_DIA:
             relatorio_consultas_dia(consultas);
             break;
+        case RELATORIO_CONSULTAS_DIA:
+            relatorio_consultas_dia(consultas);
+            break;
         case SAIR:
             printf("Saindo...\n");
             break;
