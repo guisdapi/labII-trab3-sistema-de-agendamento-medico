@@ -342,6 +342,36 @@ void relatorio_pacientes_especialidade(Consultas *l){
         printf("Nenhum paciente encontrado, ou então a consulta ainda não foi realizada.\n");
 }
 
-void relatorio_pacientes_medicos(Consultas *l){
+void relatorio_pacientes_por_medico(Medico* lista_medicos, Consultas* lista_consultas) {
+    printf("\nPacientes Atendidos por Medico\n");
 
+    if (lista_medicos == NULL) {
+        printf("Nao ha medicos cadastrados.\n");
+        return;
+    }
+
+    Medico* medico_atual = lista_medicos;
+
+    while (medico_atual != NULL) {
+        printf("\n----------------------------------\n");
+        printf("Medico: %s - CRM: %s\n", medico_atual->nome, medico_atual->crm);
+        printf("Pacientes atendidos:\n");
+
+        Consultas* consulta_atual = lista_consultas;
+        int pacientes_encontrados = 0;
+
+        while (consulta_atual != NULL) {
+            if (consulta_atual->medico == medico_atual && consulta_atual->agendadaFlag == REALIZADA) {
+                printf(" - %s\n", consulta_atual->paciente->nome);
+                pacientes_encontrados++;
+            }
+            consulta_atual = consulta_atual->prox; // Avança para a próxima consulta
+        }
+
+        if (pacientes_encontrados == 0) {
+            printf(" - Nenhum paciente atendido ate o momento.\n");
+        }
+
+        medico_atual = medico_atual->prox;
+    }
 }

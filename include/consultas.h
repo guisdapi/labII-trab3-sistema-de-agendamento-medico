@@ -32,6 +32,6 @@ void relatorio_consultas_dia(Consultas* l);
 void relatorio_consultas_paciente(Consultas* l);
 void relatorio_consulta_descricao(Consultas* l);
 void relatorio_pacientes_especialidade(Consultas* l);
-void relatorio_pacientes_medicos(Consultas* l);
+void relatorio_pacientes_por_medico(Medico* lista_medicos, Consultas* lista_consultas);
 
 #endif

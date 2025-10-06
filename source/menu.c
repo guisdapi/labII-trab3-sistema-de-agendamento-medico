@@ -63,7 +63,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             relatorio_pacientes_especialidade(consultas);
             break;
         case RELATORIO_LISTAR_PACIENTE:
-            relatorio_pacientes_medicos(consultas);
+            relatorio_pacientes_por_medico(medicos, consultas);
             break;
         case SAIR:
             printf("Saindo...\n");
