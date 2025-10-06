@@ -111,6 +111,23 @@ Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPac
     return novo_node;
 }
 
+void listar_consulta(Consultas* consulta){
+    printf("Paciente: %s - CPF: %s\n", consulta->paciente->nome, consulta->paciente->cpf);
+    printf("Medico: %s - Especialidade: %s\n", consulta->medico->nome, consulta->medico->especialidade);
+    printf("Data: %02d/%02d\n", consulta->data[0], consulta->data[1]);
+    printf("Horario: %02d:%02d\n", consulta->horario[0], consulta->horario[1]);
+    switch(consulta->agendadaFlag){
+        case MARCADA:
+            printf("Estado: a consulta está marcada.\n");
+            break;
+        case REALIZADA:
+            printf("Estado: essa consulta já foi realizada.\n");
+            printf("Descrição: %s\n", consulta->descricao);
+            break;
+    }
+    printf("---------------------------\n");
+}
+
 void listar_consultas (Consultas* l) {
     if (l == NULL) {
         printf("\nNao ha consultas agendadas.\n");
@@ -225,4 +242,18 @@ void realizar_consulta(Consultas* l) {
         p = p->prox;
     }
     printf("\nNenhuma consulta AGENDADA foi encontrada para os dados informados.\n");
+}
+
+//r2
+void listar_consultas_paciente(Consultas* l){
+    Consultas* p = l;
+    char cpf[MAX_STRING_SIZE];
+    printf("Listando todas as consultas realizadas por um paciente.\n");
+    get_string("Digite o CPF do paciente: \n", cpf, MAX_STRING_SIZE);
+    while(p != NULL){
+        if(strcmp(cpf, l->paciente->cpf) == 0 && l->agendadaFlag == REALIZADA){
+            listar_consulta(p);
+        }
+        p = p->prox;
+    }
 }
