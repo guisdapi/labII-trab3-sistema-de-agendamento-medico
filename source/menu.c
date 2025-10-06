@@ -45,8 +45,6 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             break;
         case REALIZAR_CONSULTA:
             realizar_consulta(consultas);
-        case RELATORIO_CONSULTAS_DIA:
-            relatorio_consultas_dia(consultas);
             break;
         case RELATORIO_CONSULTAS_DIA:
             relatorio_consultas_dia(consultas);
