@@ -1,6 +1,10 @@
 #ifndef MEDICOS_H
 #define MEDICOS_H
 
+#define HORARIOS 18
+
+typedef struct Consultas Consultas;
+
 typedef struct Medico{
     char crm[MAX_STRING_SIZE];
     char nome[MAX_STRING_SIZE];

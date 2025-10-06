@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "projects.h"
+
+static const char *LISTA_HORARIOS[HORARIOS] = {
+    "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
+    "11:00", "11:30", "12:00", "14:00", "14:30", "15:00", 
+    "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"
+};
 
 Consultas* cria_consulta(){
     return NULL;
