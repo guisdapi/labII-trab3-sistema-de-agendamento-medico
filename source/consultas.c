@@ -124,6 +124,15 @@ void listar_consultas (Consultas* l) {
         printf("Medico: %s - Especialidade: %s\n", p->medico->nome, p->medico->especialidade);
         printf("Data: %02d/%02d\n", p->data[0], p->data[1]);
         printf("Horario: %02d:%02d\n", p->horario[0], p->horario[1]);
+        switch(p->agendadaFlag){
+            case MARCADA:
+                printf("Estado: a consulta está marcada.\n");
+                break;
+            case REALIZADA:
+                printf("Estado: essa consulta já foi realizada.\n");
+                printf("Descrição: %s\n", p->descricao);
+                break;
+        }
         printf("---------------------------\n");
         p = p->prox;
     }

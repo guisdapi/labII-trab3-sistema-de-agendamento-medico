@@ -4,9 +4,8 @@
 #include <stdbool.h>
 
 enum AgendadaFlag{
-    LIVRE = 0,
-    MARCADA,
-    REALIZADA,
+    MARCADA = 0,
+    REALIZADA
 };
 
 typedef struct Consultas{

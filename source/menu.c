@@ -44,6 +44,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             break;
         case REALIZAR_CONSULTA:
             realizar_consulta(consultas);
+            break;
         case SAIR:
             printf("Saindo...\n");
             break;
