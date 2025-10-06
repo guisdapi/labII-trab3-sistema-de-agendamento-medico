@@ -223,3 +223,7 @@ void realizar_consulta(Consultas* l) {
     }
     printf("\nNenhuma consulta AGENDADA foi encontrada para os dados informados.\n");
 }
+
+void relatorio_consultas_dia(Consultas* l) {
+    
+}
