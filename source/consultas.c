@@ -294,3 +294,38 @@ void relatorio_consultas_paciente(Consultas* l){
     if(!consulta_achada)
         printf("Nenhuma consulta REALIZADA foi encontra para este paciente\n");
 }
+
+//r3
+void relatorio_consulta_descricao(Consultas *l){
+    char cpf_busca[MAX_STRING_SIZE];
+    get_string("Insira o CPF do paciente\n", cpf_busca, MAX_STRING_SIZE);
+    printf("Digite a data e horario da consulta:\n");
+    int dia_busca = get_int("Dia: ");
+    int mes_busca = get_int("Mes: ");
+    int hora_busca = get_int("Hora: ");
+    int min_busca = get_int("Minuto: ");
+
+    bool consulta_encontrada = false;
+    Consultas* p = l;
+    while(p != NULL){
+        if (strcmp(p->paciente->cpf, cpf_busca) == 0 &&
+            p->data[0] == dia_busca &&
+            p->data[1] == mes_busca &&
+            p->horario[0] == hora_busca &&
+            p->horario[1] == min_busca && p->agendadaFlag == REALIZADA){
+                printf("Descrição da consulta:\n%s\n", p->descricao);
+                consulta_encontrada = true;
+            }
+            p = p->prox;
+    }
+    if(!consulta_encontrada)
+        printf("Consulta não foi encontrada ou ainda não foi realizada\n");
+}
+
+void relatorio_pacientes_especialidade(Consultas *l){
+    
+}
+
+void relatorio_pacientes_medicos(Consultas *l){
+
+}
