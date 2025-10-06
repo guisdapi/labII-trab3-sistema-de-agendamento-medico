@@ -5,7 +5,7 @@
 
 enum AgendadaFlag{
     MARCADA = 1,
-    REALIZADA = 2,
+    REALIZADA = 2
 };
 
 typedef struct Consultas{
