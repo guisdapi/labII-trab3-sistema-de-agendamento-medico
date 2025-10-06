@@ -30,7 +30,7 @@ Consultas* desmarcar_consulta(Consultas* l);
 void realizar_consulta(Consultas* l);
 void relatorio_consultas_dia(Consultas* l);
 void relatorio_consultas_paciente(Consultas* l);
-void relatorio_descricoes_mes(Consultas* l);
+void relatorio_consulta_descricao(Consultas* l);
 void relatorio_pacientes_especialidade(Consultas* l);
 void relatorio_pacientes_medicos(Consultas* l);
 

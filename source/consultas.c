@@ -281,12 +281,16 @@ void relatorio_consultas_dia(Consultas* l) {
 void relatorio_consultas_paciente(Consultas* l){
     Consultas* p = l;
     char cpf[MAX_STRING_SIZE];
+    bool consulta_achada = false;
     printf("Listando todas as consultas realizadas por um paciente.\n");
     get_string("Digite o CPF do paciente: \n", cpf, MAX_STRING_SIZE);
     while(p != NULL){
         if(strcmp(cpf, l->paciente->cpf) == 0 && l->agendadaFlag == REALIZADA){
             listar_consulta(p);
+            consulta_achada = true;
         }
         p = p->prox;
     }
+    if(!consulta_achada)
+        printf("Nenhuma consulta REALIZADA foi encontra para este paciente\n");
 }

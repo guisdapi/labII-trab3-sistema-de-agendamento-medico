@@ -17,7 +17,10 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         printf("7. Desmarcar consulta\n");
         printf("8. Realizar consulta\n");
         printf("9. Relatorio 1 - Listar consultas de um dia especifico\n");
-        printf("10. Relatorio 2 - Listar consultas de um paciente\n");
+        printf("10. Relatorio 2 - Listar consultas realizadas de um paciente\n");
+        printf("11. Relatorio 3 - Listar as descrições textuais de uma consulta\n");
+        printf("12. Relatorio 4 - Listar todos os pacientes por especialidade em um mês\n");
+        printf("13. Relatorio 5 - Listar os pacientes que já consultaram com cada médico\n");
         printf("0. Sair\n");
         aux = get_int("Escolha uma opção: ");
 
@@ -39,7 +42,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             consultas = insere_consulta(consultas, medicos, pacientes);
             break;
         case LISTAR_CONSULTA:
-            listar_consultas(consultas);
+            listar_todas_consultas(consultas);
             break;
         case DESMARCAR_CONSULTA:
             consultas = desmarcar_consulta(consultas);
@@ -52,6 +55,15 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             break;
         case RELATORIO_CONSULTAS_PACIENTE:
             relatorio_consultas_paciente(consultas);
+            break;
+        case RELATORIO_CONSULTA_DESCRICAO:
+            relatorio_consulta_descricao(consultas);
+            break;
+        case RELATORIO_ESPECIALIDADE_MES:
+            relatorio_pacientes_especialidade(consultas);
+            break;
+        case RELATORIO_LISTAR_PACIENTE:
+            relatorio_pacientes_medicos(consultas);
             break;
         case SAIR:
             printf("Saindo...\n");
