@@ -1,6 +1,5 @@
 #ifndef CONSULTAS_H
 #define CONSULTAS_H
-#include <stdbool.h>
 
 #include <stdbool.h>
 
@@ -27,5 +26,7 @@ bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Pacien
 void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas);
 Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente);
 void listar_consultas(Consultas* l);
+Consultas* desmarcar_consulta(Consultas* l);
+void realizar_consulta(Consultas* l);
 
 #endif

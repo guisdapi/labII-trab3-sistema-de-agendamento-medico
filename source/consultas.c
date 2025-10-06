@@ -14,7 +14,7 @@ Consultas* cria_consulta(){
     return NULL;
 }
 
-// Verifica se um horário está disponível, retorna 'true' se estiver livre, 'false' se estiver ocupado
+
 bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Paciente* paciente, int dia, int mes, int hora, int minuto) {
     Consultas* p = lista_consultas;
     while(p != NULL) {
@@ -33,14 +33,12 @@ bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Pacien
         }
         p = p->prox;
     }
-    // Se saiu do loop, o horário está livre
+
     return true;
 }
 
-// Em consultas.c
-
 void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas){
-    printf("\n--- Agendamento de Consulta ---\n");
+    printf("\nAgendamento de Consulta\n");
     char buffer[MAX_STRING_SIZE];
 
     get_string("Insira o nome do medico: ", buffer, MAX_STRING_SIZE);
@@ -74,7 +72,7 @@ void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPa
 
     if (!minuto_valido || (!horario_manha_valido && !horario_tarde_valido)) {
         printf("ERRO: Horario invalido! Permitido: 08:00 as 11:30 e 14:00 as 17:30, em intervalos de 30 minutos.\n");
-        return; // Ou 'return false;' se estiver usando a versão com bool
+        return;
     }
 
     if (!verifica_disponibilidade(listaConsultas, medico_da_consulta, paciente_da_consulta, dia, mes, hora, minuto)) {
@@ -119,7 +117,6 @@ Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPac
     return novo_node;
 }
 
-
 void listar_consultas (Consultas* l) {
     if (l == NULL) {
         printf("\nNao ha consultas agendadas.\n");
@@ -136,4 +133,93 @@ void listar_consultas (Consultas* l) {
         printf("---------------------------\n");
         p = p->prox;
     }
+}
+
+Consultas* desmarcar_consulta(Consultas* l) {
+    printf("\nDesmarcar Consulta\n");
+
+    char cpf_busca[MAX_STRING_SIZE];
+    get_string("Digite o CPF do paciente: ", cpf_busca, MAX_STRING_SIZE);
+
+    printf("Digite a data da consulta a ser desmarcada:\n");
+    int dia_busca = get_int("Dia: ");
+    int mes_busca = get_int("Mes: ");
+
+    printf("Digite o horario da consulta a ser desmarcada:\n");
+    int hora_busca = get_int("Hora: ");
+    int min_busca = get_int("Minuto: ");
+
+    Consultas* p = l;
+
+    while (p != NULL) {
+        if (strcmp(p->paciente->cpf, cpf_busca) == 0 &&
+            p->data[0] == dia_busca &&
+            p->data[1] == mes_busca &&
+            p->horario[0] == hora_busca &&
+            p->horario[1] == min_busca)
+        {
+            // Remover primeiro nó da lista
+            if (p->ante == NULL) {
+                l = p->prox;
+                if (l != NULL) {
+                    l->ante = NULL;
+                }
+            }
+            // Remover meio ou fim da lista
+            else {
+                p->ante->prox = p->prox;
+                if (p->prox != NULL) {
+                    p->prox->ante = p->ante;
+                }
+            }
+
+            free(p);
+            printf("\nConsulta desmarcada com sucesso!\n");
+            return l;
+        }
+        p = p->prox;
+    }
+
+    printf("\nNenhuma consulta encontrada para os dados informados.\n");
+    return l;
+}
+
+void realizar_consulta(Consultas* l) {
+    printf("\nRealizar Consulta\n");
+
+    char cpf_busca[MAX_STRING_SIZE];
+    get_string("Digite o CPF do paciente que esta sendo atendido: ", cpf_busca, MAX_STRING_SIZE);
+
+    printf("Digite a data e horario da consulta:\n");
+    int dia_busca = get_int("Dia: ");
+    int mes_busca = get_int("Mes: ");
+    int hora_busca = get_int("Hora: ");
+    int min_busca = get_int("Minuto: ");
+
+    Consultas* p = l;
+
+    while (p != NULL) {
+        if (strcmp(p->paciente->cpf, cpf_busca) == 0 &&
+            p->data[0] == dia_busca && p->data[1] == mes_busca &&
+            p->horario[0] == hora_busca && p->horario[1] == min_busca)
+        {
+            // Checa se a consulta tá realmente agendada para ser realizada
+            if (p->agendadaFlag == MARCADA) {
+                p->agendadaFlag = REALIZADA;
+                printf("Status da consulta alterado para 'REALIZADA'.\n");
+
+                // Descrição é preenchida no momento da consulta
+                printf("Por favor, insira a descricao da consulta (exames, medicamentos, etc.):\n");
+                get_string("Descricao: ", p->descricao, MAX_STRING_SIZE);
+
+                printf("\nConsulta finalizada e descricao salva com sucesso!\n");
+                return;
+            } else if (p->agendadaFlag == REALIZADA) {
+                printf("\nERRO: Esta consulta ja foi realizada anteriormente.\n");
+                return;
+            }
+        }
+        p = p->prox;
+    }
+    printf("\nNenhuma consulta AGENDADA foi encontrada para os dados informados.\n");
 }
