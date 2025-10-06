@@ -4,11 +4,13 @@
 #define MAX_STRING_SIZE 512
 
 enum Status{
-    INSERIR_MEDICO = 1,
+    SAIR = 0,
+    INSERIR_MEDICO,
     LISTAR_MEDICOS,
     INSERIR_PACIENTE,
     LISTAR_PACIENTES,
-    INSERIR_CONSULTA
+    INSERIR_CONSULTA,
+    LISTAR_CONSULTA
 };
 
 #include "pacientes.h"
@@ -17,5 +19,6 @@ enum Status{
 #include "lista.h"
 #include "menu.h"
 #include "helpers.h"
+#include <stdbool.h>
 
 #endif

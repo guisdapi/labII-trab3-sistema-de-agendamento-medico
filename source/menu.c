@@ -13,6 +13,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         printf("3. Inserir paciente\n");
         printf("4. Listar pacientes\n");
         printf("5. Inserir consulta\n");
+        printf("6. Listar consultas\n");
         printf("0. Sair\n");
         aux = get_int("Escolha uma opção: ");
 
@@ -31,7 +32,14 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             imprime_pacientes(pacientes);
             break;
         case INSERIR_CONSULTA:
-            insere_consulta(consultas, medicos, pacientes);
+            consultas = insere_consulta(consultas, medicos, pacientes);
+            break;
+        case LISTAR_CONSULTA:
+            listar_consultas(consultas);
+            break;
+        case SAIR:
+            printf("Saindo...\n");
+            break;
         default:
             printf("Opção inválida.");
             break;

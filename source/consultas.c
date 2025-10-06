@@ -7,35 +7,119 @@ Consultas* cria_consulta(){
     return NULL;
 }
 
-void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente){
-    printf("Criando consulta...\n");
+// Verifica se um horário está disponível, retorna 'true' se estiver livre, 'false' se estiver ocupado
+bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Paciente* paciente, int dia, int mes, int hora, int minuto) {
+    Consultas* p = lista_consultas;
+    while(p != NULL) {
+        // Verifica se a data e o horário são os mesmos
+        if (p->data[0] == dia && p->data[1] == mes && p->horario[0] == hora && p->horario[1] == minuto) {
+            // Médico já tem consulta nesse horário
+            if (p->medico == medico) {
+                printf("ERRO: O medico %s ja possui uma consulta neste horario.\n", medico->nome);
+                return false;
+            }
+            // Paciente já tem consulta nesse horário
+            if (p->paciente == paciente) {
+                printf("ERRO: O paciente %s ja possui uma consulta neste horario.\n", paciente->nome);
+                return false;
+            }
+        }
+        p = p->prox;
+    }
+    // Se saiu do loop, o horário está livre
+    return true;
+}
+
+void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas){
+    printf("\n--- Agendamento de Consulta ---\n");
     char buffer[MAX_STRING_SIZE];
-    get_string("Insira o nome do médico: \n", buffer, MAX_STRING_SIZE);
+
+    get_string("Insira o nome do medico: ", buffer, MAX_STRING_SIZE);
     string_to_upper(buffer);
     Medico* medico_da_consulta = procura_medico(listaMedico, buffer);
     if(medico_da_consulta == NULL){
-        printf("Médico não encontrado, confira se digitou o nome corretamente\n");
+        printf("Medico nao encontrado.\n");
         return;
     }
-    get_string("Insira o CPF do paciente: \n", buffer, MAX_STRING_SIZE);
+
+    get_string("Insira o CPF do paciente: ", buffer, MAX_STRING_SIZE);
     Paciente* paciente_da_consulta = procura_paciente(listaPaciente, buffer);
     if(paciente_da_consulta == NULL){
-        printf("Paciente não encontrado, confira se digitou o cpf corretamente\n");
+        printf("Paciente nao encontrado.\n");
         return;
     }
+
+    //Coletar e Validar Data e Horário
+    printf("Digite a data da consulta:\n");
+    int dia = get_int("Dia: ");
+    int mes = get_int("Mes: ");
     
+    printf("Digite o horario da consulta (consultas de 30 em 30 min):\n");
+    int hora = get_int("Hora (8-11 ou 14-17): ");
+    int minuto = get_int("Minuto (0 ou 30): ");
+
+    // Validação básica do horário
+    bool horario_manha = (hora >= 8 && hora < 12) && (minuto == 0 || minuto == 30);
+    bool horario_tarde = (hora >= 14 && hora < 18) && (minuto == 0 || minuto == 30);
+
+    if (!horario_manha && !horario_tarde) {
+        printf("ERRO: Horario invalido! Permitido: 08:00-12:00 e 14:00-18:00, em intervalos de 30 minutos.\n");
+        return;
+    }
+
+    // Verificar Disponibilidade
+    if (!verifica_disponibilidade(listaConsultas, medico_da_consulta, paciente_da_consulta, dia, mes, hora, minuto)) {
+        // A função já imprime a mensagem de erro específica
+        return; // Retorna se o horário não está vago
+    }
+    
+    novo_node->paciente = paciente_da_consulta;
+    novo_node->medico = medico_da_consulta;
+    novo_node->data[0] = dia;
+    novo_node->data[1] = mes;
+    novo_node->horario[0] = hora;
+    novo_node->horario[1] = minuto;
+    novo_node->agendadaFlag = MARCADA;
+    strcpy(novo_node->descricao, "Descricao a ser preenchida pelo medico.");
+
+    printf("\nConsulta agendada com sucesso!\n");
 }
 
 Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente){
     Consultas* novo_node;
     novo_node = (Consultas*)malloc(sizeof(Consultas));
 
-    input_consulta(novo_node, listaMedico, listaPaciente);
+    input_consulta(novo_node, listaMedico, listaPaciente, l);
+
+    // Se a função input_consultas retornar sem preencher (erro)
+    if(novo_node->paciente == NULL){
+        free(novo_node);
+        return l;
+    }
 
     novo_node->prox = l;
     novo_node->ante = NULL;
 
-    if(l != NULL)
+    if (l != NULL)
         l->ante = novo_node;
     return novo_node;
+}
+
+
+void listar_consultas (Consultas* l) {
+    if (l == NULL) {
+        printf("\nNao ha consultas agendadas.\n");
+        return;
+    }
+
+    printf("\nImpressao das consultas.\n");
+    Consultas* p = l;
+    while (p != NULL) {
+        printf("Paciente: %s - CPF: %s\n", p->paciente->nome, p->paciente->cpf);
+        printf("Medico: %s - Especialidade: %s\n", p->medico->nome, p->medico->especialidade);
+        printf("Data: %02d/%02d\n", p->data[0], p->data[1]);
+        printf("Horario: %02d:%02d\n", p->horario[0], p->horario[1]);
+        printf("---------------------------\n");
+        p = p->prox;
+    }
 }

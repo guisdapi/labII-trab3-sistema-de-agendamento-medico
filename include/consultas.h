@@ -1,6 +1,8 @@
 #ifndef CONSULTAS_H
 #define CONSULTAS_H
 
+#include <stdbool.h>
+
 enum AgendadaFlag{
     LIVRE = 0,
     MARCADA,
@@ -19,7 +21,9 @@ typedef struct Consultas{
 }Consultas;
 
 Consultas* cria_consulta();
-void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente);
+bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Paciente* paciente, int dia, int mes, int hora, int minuto);
+void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas);
 Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente);
+void listar_consultas(Consultas* l);
 
 #endif
