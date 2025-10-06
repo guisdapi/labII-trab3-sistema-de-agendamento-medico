@@ -17,6 +17,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         printf("7. Desmarcar consulta\n");
         printf("8. Realizar consulta\n");
         printf("9. Relatorio 1 - Listar consultas de um dia especifico\n");
+        printf("10. Relatorio 2 - Listar consultas de um paciente\n");
         printf("0. Sair\n");
         aux = get_int("Escolha uma opção: ");
 

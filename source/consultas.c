@@ -261,20 +261,6 @@ void realizar_consulta(Consultas* l) {
     printf("\nNenhuma consulta AGENDADA foi encontrada para os dados informados.\n");
 }
 
-//r2
-void listar_consultas_paciente(Consultas* l){
-    Consultas* p = l;
-    char cpf[MAX_STRING_SIZE];
-    printf("Listando todas as consultas realizadas por um paciente.\n");
-    get_string("Digite o CPF do paciente: \n", cpf, MAX_STRING_SIZE);
-    while(p != NULL){
-        if(strcmp(cpf, l->paciente->cpf) == 0 && l->agendadaFlag == REALIZADA){
-            listar_consulta(p);
-        }
-        p = p->prox;
-    }
-}
-
 //r1
 void relatorio_consultas_dia(Consultas* l) {
     printf("\nR1: Consultas Agendadas por Dia\n");
@@ -305,5 +291,19 @@ void relatorio_consultas_dia(Consultas* l) {
     } else {
         printf("----------------------------------\n");
         printf("Total: %d consulta(s) agendada(s).\n", consultas_encontradas);
+    }
+}
+
+//r2
+void listar_consultas_paciente(Consultas* l){
+    Consultas* p = l;
+    char cpf[MAX_STRING_SIZE];
+    printf("Listando todas as consultas realizadas por um paciente.\n");
+    get_string("Digite o CPF do paciente: \n", cpf, MAX_STRING_SIZE);
+    while(p != NULL){
+        if(strcmp(cpf, l->paciente->cpf) == 0 && l->agendadaFlag == REALIZADA){
+            listar_consulta(p);
+        }
+        p = p->prox;
     }
 }
