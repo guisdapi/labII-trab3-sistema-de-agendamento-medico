@@ -37,6 +37,8 @@ bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Pacien
     return true;
 }
 
+// Em consultas.c
+
 void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas){
     printf("\n--- Agendamento de Consulta ---\n");
     char buffer[MAX_STRING_SIZE];
@@ -55,39 +57,42 @@ void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPa
         printf("Paciente nao encontrado.\n");
         return;
     }
-
-    //Coletar e Validar Data e Horário
+    
     printf("Digite a data da consulta:\n");
     int dia = get_int("Dia: ");
     int mes = get_int("Mes: ");
     
     printf("Digite o horario da consulta (consultas de 30 em 30 min):\n");
     int hora = get_int("Hora (8-11 ou 14-17): ");
+
     int minuto = get_int("Minuto (0 ou 30): ");
 
-    // Validação básica do horário
+    // Validação
     bool horario_manha = (hora >= 8 && hora < 12) && (minuto == 0 || minuto == 30);
+
     bool horario_tarde = (hora >= 14 && hora < 18) && (minuto == 0 || minuto == 30);
 
     if (!horario_manha && !horario_tarde) {
-        printf("ERRO: Horario invalido! Permitido: 08:00-12:00 e 14:00-18:00, em intervalos de 30 minutos.\n");
         return;
     }
 
-    // Verificar Disponibilidade
     if (!verifica_disponibilidade(listaConsultas, medico_da_consulta, paciente_da_consulta, dia, mes, hora, minuto)) {
-        // A função já imprime a mensagem de erro específica
-        return; // Retorna se o horário não está vago
+        return;
     }
-    
+
     novo_node->paciente = paciente_da_consulta;
+
     novo_node->medico = medico_da_consulta;
+
     novo_node->data[0] = dia;
     novo_node->data[1] = mes;
+
     novo_node->horario[0] = hora;
     novo_node->horario[1] = minuto;
+
     novo_node->agendadaFlag = MARCADA;
-    strcpy(novo_node->descricao, "Descricao a ser preenchida pelo medico.");
+
+    strcpy(novo_node->descricao, "Descricao a ser preenchida.");
 
     printf("\nConsulta agendada com sucesso!\n");
 }
@@ -95,6 +100,7 @@ void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPa
 Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente){
     Consultas* novo_node;
     novo_node = (Consultas*)malloc(sizeof(Consultas));
+    novo_node->paciente = NULL; 
 
     input_consulta(novo_node, listaMedico, listaPaciente, l);
 

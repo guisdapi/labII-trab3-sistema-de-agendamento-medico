@@ -29,7 +29,7 @@ int get_int(const char *pergunta){
     char *endptr;
 
     while(true){
-        get_string(pergunta, buffer, MAX_STRING_SIZE);
+        get_string(pergunta, buffer, sizeof(buffer));
 
         numero = strtol(buffer, &endptr, 10);
 
