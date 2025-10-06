@@ -67,13 +67,14 @@ void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPa
 
     int minuto = get_int("Minuto (0 ou 30): ");
 
-    // Validação
-    bool horario_manha = (hora >= 8 && hora < 12) && (minuto == 0 || minuto == 30);
+    // Validação do horário de atendimento
+    bool minuto_valido = (minuto == 0 || minuto == 30);
+    bool horario_manha_valido = (hora >= 8 && hora < 12); // Válido de 8:00 a 11:30
+    bool horario_tarde_valido = (hora >= 14 && hora < 18); // Válido de 14:00 a 17:30
 
-    bool horario_tarde = (hora >= 14 && hora < 18) && (minuto == 0 || minuto == 30);
-
-    if (!horario_manha && !horario_tarde) {
-        return;
+    if (!minuto_valido || (!horario_manha_valido && !horario_tarde_valido)) {
+        printf("ERRO: Horario invalido! Permitido: 08:00 as 11:30 e 14:00 as 17:30, em intervalos de 30 minutos.\n");
+        return; // Ou 'return false;' se estiver usando a versão com bool
     }
 
     if (!verifica_disponibilidade(listaConsultas, medico_da_consulta, paciente_da_consulta, dia, mes, hora, minuto)) {
