@@ -4,8 +4,8 @@
 #include <stdbool.h>
 
 enum AgendadaFlag{
-    MARCADA = 0,
-    REALIZADA
+    MARCADA = 1,
+    REALIZADA = 2
 };
 
 typedef struct Consultas{
@@ -25,9 +25,11 @@ bool verifica_disponibilidade(Consultas* lista_consultas, Medico* medico, Pacien
 void input_consulta(Consultas* novo_node, Medico* listaMedico, Paciente* listaPaciente, Consultas* listaConsultas);
 Consultas* insere_consulta(Consultas* l, Medico* listaMedico, Paciente* listaPaciente);
 void listar_consulta(Consultas* consulta);
+void listar_consulta(Consultas* consulta);
 void listar_consultas(Consultas* l);
 Consultas* desmarcar_consulta(Consultas* l);
 void realizar_consulta(Consultas* l);
+void listar_consultas_paciente(Consultas* l);
 void listar_consultas_paciente(Consultas* l);
 
 #endif

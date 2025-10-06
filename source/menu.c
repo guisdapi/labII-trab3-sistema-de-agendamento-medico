@@ -16,6 +16,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         printf("6. Listar consultas\n");
         printf("7. Desmarcar consulta\n");
         printf("8. Realizar consulta\n");
+        printf("9. Relatorio 1 - Listar consultas de um dia especifico\n");
         printf("0. Sair\n");
         aux = get_int("Escolha uma opção: ");
 
@@ -44,6 +45,9 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
             break;
         case REALIZAR_CONSULTA:
             realizar_consulta(consultas);
+            break;
+        case RELATORIO_CONSULTAS_DIA:
+            relatorio_consultas_dia(consultas);
             break;
         case SAIR:
             printf("Saindo...\n");

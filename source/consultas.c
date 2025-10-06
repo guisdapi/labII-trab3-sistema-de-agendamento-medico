@@ -128,6 +128,23 @@ void listar_consulta(Consultas* consulta){
     printf("---------------------------\n");
 }
 
+void listar_consulta(Consultas* consulta){
+    printf("Paciente: %s - CPF: %s\n", consulta->paciente->nome, consulta->paciente->cpf);
+    printf("Medico: %s - Especialidade: %s\n", consulta->medico->nome, consulta->medico->especialidade);
+    printf("Data: %02d/%02d\n", consulta->data[0], consulta->data[1]);
+    printf("Horario: %02d:%02d\n", consulta->horario[0], consulta->horario[1]);
+    switch(consulta->agendadaFlag){
+        case MARCADA:
+            printf("Estado: a consulta está marcada.\n");
+            break;
+        case REALIZADA:
+            printf("Estado: essa consulta já foi realizada.\n");
+            printf("Descrição: %s\n", consulta->descricao);
+            break;
+    }
+    printf("---------------------------\n");
+}
+
 void listar_consultas (Consultas* l) {
     if (l == NULL) {
         printf("\nNao ha consultas agendadas.\n");
@@ -255,5 +272,38 @@ void listar_consultas_paciente(Consultas* l){
             listar_consulta(p);
         }
         p = p->prox;
+    }
+}
+
+//r1
+void relatorio_consultas_dia(Consultas* l) {
+    printf("\nR1: Consultas Agendadas por Dia\n");
+
+    int dia_busca = get_int("Digite o dia que deseja consultar: ");
+    int mes_busca = get_int("Digite o mes: ");
+
+    Consultas* p = l;
+    int consultas_encontradas = 0;
+
+    printf("\n-- Consultas agendadas para %02d/%02d --\n", dia_busca, mes_busca);
+
+    while (p != NULL) {
+
+        if (p->data[0] == dia_busca && p->data[1] == mes_busca && p->agendadaFlag == MARCADA) {
+
+            printf("----------------------------------\n");
+            printf("Horario: %02d:%02d\n", p->horario[0], p->horario[1]);
+            printf("Paciente: %s\n", p->paciente->nome);
+            printf("Medico: %s - Especialidade: %s\n", p->medico->nome, p->medico->especialidade);
+            consultas_encontradas++;
+        }
+        p = p->prox;
+    }
+
+    if (consultas_encontradas == 0) {
+        printf("\nNenhuma consulta AGENDADA foi encontrada para esta data.\n");
+    } else {
+        printf("----------------------------------\n");
+        printf("Total: %d consulta(s) agendada(s).\n", consultas_encontradas);
     }
 }
