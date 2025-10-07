@@ -12,7 +12,7 @@ void menu(Medico* medicos, Paciente* pacientes, Consultas* consultas) {
         printf("2. Listar medicos\n");
         printf("3. Inserir paciente\n");
         printf("4. Listar pacientes\n");
-        printf("5. Inserir consulta\n");
+        printf("5. Agendar consulta\n");
         printf("6. Listar consultas\n");
         printf("7. Desmarcar consulta\n");
         printf("8. Realizar consulta\n");
